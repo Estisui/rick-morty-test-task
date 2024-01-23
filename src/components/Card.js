@@ -1,14 +1,17 @@
 import styled from "styled-components";
 
 const CardContainer = styled.div`
+  width: 300px;
+  height: 480px;
   border: 2px solid black;
   border-radius: 10px;
   text-align: center;
-  max-width: 300px;
   overflow: hidden;
 `;
 
 const CardPicture = styled.img`
+  width: 100%;
+  height: 300px;
 `;
 
 const CardText = styled.div`
@@ -33,7 +36,7 @@ const CardStat = styled.p`
 function Card({ cardInfo }) {
   return (
     <CardContainer>
-      <CardPicture src={cardInfo.image} alt={cardInfo.title}></CardPicture>
+      <CardPicture src={cardInfo.image} alt={cardInfo.title} loading="lazy"></CardPicture>
       <CardText>
         <CardTitle>{cardInfo.name}</CardTitle>
         <CardStat>Status: {cardInfo.status}</CardStat>
