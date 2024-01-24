@@ -8,11 +8,18 @@ const CardsContainer = styled.div`
   gap: 20px;
 `;
 
+const Message = styled.p`
+  text-align: center;
+  font-size: 1.5rem;
+`;
+
 function Cards({ error, isLoaded, items }) {
   if (error) {
-    return <p>Error: {error.message}</p>;
+    return <Message>Error: {error.message}</Message>;
   } else if (!isLoaded) {
-    return <p>Loading...</p>;
+    return <Message>Loading...</Message>;
+  } else if (items.length === 0) {
+    return <Message>Nothing found</Message>;
   } else {
     return (
       <CardsContainer>

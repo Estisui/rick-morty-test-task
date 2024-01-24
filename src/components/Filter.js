@@ -1,3 +1,4 @@
+import defaultLink from "../api/defaultLink";
 import styled from "styled-components";
 
 const FilterContainer = styled.div`
@@ -20,6 +21,7 @@ const FieldWrapper = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
+  row-gap: 10px;
 `;
 
 const Label = styled.label`
@@ -63,35 +65,44 @@ const Submit = styled.input`
   }
 `;
 
-function Filter() {
+function Filter({ updateCharacters }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const formJson = Object.fromEntries(formData.entries());
+    updateCharacters(defaultLink + "?" + new URLSearchParams(formJson));
+  }
+
   return (
     <FilterContainer>
       <Title>Filter</Title>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <FieldWrapper>
-          <Label>Name</Label>
-          <TextField></TextField>
+          <Label htmlFor="name">Name</Label>
+          <TextField id="name" name="name"></TextField>
         </FieldWrapper>
         <FieldWrapper>
-          <Label>Status</Label>
-          <SelectField>
-            <Option>Any</Option>
+          <Label htmlFor="status">Status</Label>
+          <SelectField id="status" name="status">
+            <Option></Option>
             <Option>Alive</Option>
             <Option>Dead</Option>
             <Option>Unknown</Option>
           </SelectField>
         </FieldWrapper>
         <FieldWrapper>
-          <Label>Species</Label>
-          <TextField></TextField>
+          <Label htmlFor="species">Species</Label>
+          <TextField id="species" name="species"></TextField>
         </FieldWrapper>
         <FieldWrapper>
-          <Label>Type</Label>
-          <TextField></TextField>
+          <Label htmlFor="type">Type</Label>
+          <TextField id="type" name="type"></TextField>
         </FieldWrapper>
         <FieldWrapper>
-          <Label>Gender</Label>
-          <SelectField>
+          <Label htmlFor="gender">Gender</Label>
+          <SelectField id="gender" name="gender">
+            <Option></Option>
             <Option>Female</Option>
             <Option>Male</Option>
             <Option>Genderless</Option>

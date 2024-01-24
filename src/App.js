@@ -47,11 +47,19 @@ function App() {
     getCharacters(link).then(
       (result) => {
         setIsLoaded(true);
-        setItems(result.results);
-        setPages({
-          prev: result.info.prev,
-          next: result.info.next,
-        });
+        if (!result.error) {
+          setItems(result.results);
+          setPages({
+            prev: result.info.prev,
+            next: result.info.next,
+          });
+        } else {
+          setItems([]);
+          setPages({
+            prev: null,
+            next: null,
+          });
+        }
       },
       (error) => {
         setIsLoaded(true);
@@ -76,13 +84,18 @@ function App() {
       <Title>Rick&Morty API App</Title>
       <Subtitle>Stepan Sukhachev for Elfsight</Subtitle>
       <Content>
-        <Filter />
+        <Filter updateCharacters={updateCharacters}/>
         <PagesSwitch
           pages={pages}
           onPrevClick={onPrevClick}
           onNextClick={onNextClick}
         />
         <Cards error={error} isLoaded={isLoaded} items={items}></Cards>
+        <PagesSwitch
+          pages={pages}
+          onPrevClick={onPrevClick}
+          onNextClick={onNextClick}
+        />
       </Content>
     </Wrapper>
   );

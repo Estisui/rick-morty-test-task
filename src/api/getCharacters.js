@@ -1,4 +1,6 @@
-const getCharacters = (link = "https://rickandmortyapi.com/api/character") => {
+import defaultLink from "./defaultLink";
+
+const getCharacters = (link = defaultLink) => {
   return fetch(link).then((res) => res.json());
 };
 
