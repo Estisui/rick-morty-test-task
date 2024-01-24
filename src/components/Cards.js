@@ -13,7 +13,7 @@ const Message = styled.p`
   font-size: 1.5rem;
 `;
 
-function Cards({ error, isLoaded, items }) {
+function Cards({ error, isLoaded, items, setModal }) {
   if (error) {
     return <Message>Error: {error.message}</Message>;
   } else if (!isLoaded) {
@@ -24,7 +24,7 @@ function Cards({ error, isLoaded, items }) {
     return (
       <CardsContainer>
         {items.map(item => (
-          <Card key={item.id} cardInfo={item}/>
+          <Card key={item.id} cardInfo={item} setModal={setModal}/>
         ))}
       </CardsContainer>
     );

@@ -8,6 +8,11 @@ const CardContainer = styled.div`
   border-radius: 10px;
   text-align: center;
   overflow: hidden;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const CardPicture = styled.img`
@@ -34,10 +39,21 @@ const CardStat = styled.p`
   margin: 0;
 `;
 
-function Card({ cardInfo }) {
+function Card({ cardInfo, setModal }) {
   return (
-    <CardContainer>
-      <CardPicture src={cardInfo.image} alt={cardInfo.title} loading="lazy"></CardPicture>
+    <CardContainer
+      onClick={() =>
+        setModal({
+          isShown: true,
+          info: cardInfo,
+        })
+      }
+    >
+      <CardPicture
+        src={cardInfo.image}
+        alt={cardInfo.title}
+        loading="lazy"
+      ></CardPicture>
       <CardText>
         <CardTitle>{cardInfo.name}</CardTitle>
         <CardStat>Status: {cardInfo.status}</CardStat>

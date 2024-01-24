@@ -4,6 +4,7 @@ import Cards from "./components/Cards";
 import getCharacters from "./api/getCharacters";
 import PagesSwitch from "./components/PagesSwitch";
 import Filter from "./components/Filter";
+import Modal from "./components/Modal";
 
 const Wrapper = styled.main`
   max-width: 1260px;
@@ -12,7 +13,7 @@ const Wrapper = styled.main`
 `;
 
 const Title = styled.h1`
-  font-size: 3.75rem;
+  font-size: 2.75rem;
   font-weight: 900;
   text-align: center;
   margin: 30px 0;
@@ -39,6 +40,10 @@ function App() {
   const [pages, setPages] = useState({
     prev: null,
     next: null,
+  });
+  const [modal, setModal] = useState({
+    isShown: false,
+    info: null,
   });
 
   // function to get characters from api and update states
@@ -76,6 +81,12 @@ function App() {
     updateCharacters(pages.next);
   };
 
+  const onModalClose = () =>
+    setModal({
+      isShown: false,
+      info: null,
+    });
+
   // get characters during first load
   useEffect(() => updateCharacters(), []);
 
@@ -84,19 +95,20 @@ function App() {
       <Title>Rick&Morty API App</Title>
       <Subtitle>Stepan Sukhachev for Elfsight</Subtitle>
       <Content>
-        <Filter updateCharacters={updateCharacters}/>
+        <Filter updateCharacters={updateCharacters} />
         <PagesSwitch
           pages={pages}
           onPrevClick={onPrevClick}
           onNextClick={onNextClick}
         />
-        <Cards error={error} isLoaded={isLoaded} items={items}></Cards>
+        <Cards error={error} isLoaded={isLoaded} items={items} setModal={setModal}></Cards>
         <PagesSwitch
           pages={pages}
           onPrevClick={onPrevClick}
           onNextClick={onNextClick}
         />
       </Content>
+      {modal.isShown && <Modal modalInfo={modal.info} onClose={onModalClose} />}
     </Wrapper>
   );
 }
