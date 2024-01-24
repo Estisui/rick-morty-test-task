@@ -1,5 +1,6 @@
 {
   "name": "my-app",
+  "homepage": "https://estisui.github.io/rick-morty-test-task/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
