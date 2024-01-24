@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import Cards from "./components/Cards";
 import getCharacters from "./api/getCharacters";
 import PagesSwitch from "./components/PagesSwitch";
+import Filter from "./components/Filter";
 
 const Wrapper = styled.main`
-  max-width: 1280px;
+  max-width: 1260px;
   margin: auto;
   padding: 20px 20px;
 `;
@@ -27,6 +28,7 @@ const Subtitle = styled.h2`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
 `;
 
@@ -60,11 +62,11 @@ function App() {
 
   const onPrevClick = () => {
     updateCharacters(pages.prev);
-  }
+  };
 
   const onNextClick = () => {
     updateCharacters(pages.next);
-  }
+  };
 
   // get characters during first load
   useEffect(() => updateCharacters(), []);
@@ -74,7 +76,12 @@ function App() {
       <Title>Rick&Morty API App</Title>
       <Subtitle>Stepan Sukhachev for Elfsight</Subtitle>
       <Content>
-        <PagesSwitch pages={pages} onPrevClick={onPrevClick} onNextClick={onNextClick} />
+        <Filter />
+        <PagesSwitch
+          pages={pages}
+          onPrevClick={onPrevClick}
+          onNextClick={onNextClick}
+        />
         <Cards error={error} isLoaded={isLoaded} items={items}></Cards>
       </Content>
     </Wrapper>

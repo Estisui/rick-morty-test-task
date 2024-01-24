@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const CardContainer = styled.div`
+  box-sizing: border-box;
   width: 300px;
   height: 480px;
   border: 2px solid black;
@@ -11,7 +12,7 @@ const CardContainer = styled.div`
 
 const CardPicture = styled.img`
   width: 100%;
-  height: 300px;
+  height: 296px;
 `;
 
 const CardText = styled.div`
